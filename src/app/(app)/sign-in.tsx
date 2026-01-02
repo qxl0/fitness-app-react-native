@@ -1,6 +1,6 @@
 import { useSignIn } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons'
-import { useRouter } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 import React from 'react'
 import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -117,6 +117,17 @@ export default function Page() {
         
         {/* Google Sign-In Button */  }
         <GoogleSignIn />
+
+        {/* Sign up link */}
+        <View className='flex-row justify-center items-center mt-5'>
+          <Text className='text-gray-600'>Don't have an account?</Text>
+          <Link href="/sign-up" asChild>
+            <TouchableOpacity>
+              <Text className='text-blue-600 font-medium ml-2'>Sign up</Text>
+            </TouchableOpacity>
+          </Link>
+        </View>
+
         </View>
 
         {/* footer */}

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-export default function SignUpScreen() {
+export default function SignUp() {
   const { isLoaded, signUp, setActive } = useSignUp()
   const router = useRouter()
 
