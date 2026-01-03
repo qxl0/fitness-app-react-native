@@ -79,7 +79,7 @@ export default function SignUp() {
               {/* Logo/Branding */  }
               <View className='items-center mb-8'>
                 <View className='w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 
-                  rounded-2xl items-center justify-center mb-4 shadown-lg'>
+                  rounded-2xl shadow-sm items-center justify-center mb-4 shadown-lg'>
                   <Ionicons name="mail" size={40} color="white" />
                 </View>
                 <Text className='text-3xl font-bold text-gray-900 mb-2'>
@@ -90,15 +90,66 @@ export default function SignUp() {
                   {emailAddress} 
                 </Text>
             </View>
-          </View>
-          </View>
         {/* Verification Form */ }
-        <Text>Verify your email</Text>
-        <TextInput
-          value={code}
-          placeholder="Enter your verification code"
-          onChangeText={(code) => setCode(code)}
-        />
+        <View className='bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8'>
+          <Text className='text-xl font-semibold text-gray-800 mb-6 text-center'>
+            Enter Verification Code
+          </Text>
+
+        {/* Code input */ }
+        <View className='mb-6'>
+          <Text className='text-sm font-medium text-gray-700 mb-2'>Verification Code</Text>
+          <View className='flex-row items-center bg-gray-50 rounded-xl px-4 py-4 border border-gray-200'>
+            <Ionicons name='key-outline' size={20} color="#6B7280" />
+            <TextInput 
+              autoCapitalize='none' 
+              value={code} 
+              placeholder='Enter the verification code' 
+              placeholderTextColor="#9CA3AF"
+              className='ml-3 flex-1 text-gray-900 text-center text-lg'
+              editable={true}
+              onChangeText={(code) => setCode(code)}
+            />
+            </View>
+            <TouchableOpacity
+              onPress={onVerifyPress}
+              disabled={isLoading}
+              className={`rounded-xl py-2 shadow-sm mt-6 ${isLoading ?  "bg-gray-400" : "bg-green-600" }`}
+              activeOpacity={0.8}
+            >
+              <View className='flex-row justify-center items-center'>
+                {isLoading ? (
+                  <Ionicons name="refresh" size={20} color="white" />
+                ) : (
+                  <Ionicons name="checkmark-circle-outline" size={20} color="white" />
+                )}
+              <Text className='text-center text-white text-lg ml-2 font-semibold'>
+                {isLoading ? (
+                  'Verifying...'
+                ) : (
+                  'Verify'
+                )}
+              </Text>
+              </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity className='py-2'>
+                <Text className='text-blue-600 font-medium text-center'>
+                  Didn't receive the code? Resend
+                </Text>
+              </TouchableOpacity>
+        </View>
+          </View>
+          </View>
+              <View className='pb-6'>
+            <Text className='text-center text-gray-500 text-sm'>
+              Almost there! Just one more step
+            </Text>
+            </View>
+
+
+          </View>
+        
         <TouchableOpacity onPress={onVerifyPress}>
           <Text>Verify</Text>
         </TouchableOpacity>
