@@ -2,7 +2,7 @@ import { useSignIn } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons'
 import { Link, useRouter } from 'expo-router'
 import React from 'react'
-import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import GoogleSignIn from './components/GoogleSignIn'
 
@@ -18,6 +18,10 @@ export default function Page() {
   const onSignInPress = async () => {
     if (!isLoaded) return
 
+    if (!emailAddress || !password) {
+      Alert.alert('Email address and password are required to sign in.')
+      return;
+    }
     // Start the sign-in process using the email and password provided
     try {
       const signInAttempt = await signIn.create({
@@ -39,6 +43,8 @@ export default function Page() {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
+    } finally {
+      setIsLoading(false);
     }
   }
 

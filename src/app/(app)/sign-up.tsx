@@ -2,7 +2,7 @@ import { useSignUp } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons'
 import { Link, useRouter } from 'expo-router'
 import * as React from 'react'
-import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function SignUp() {
@@ -20,6 +20,11 @@ export default function SignUp() {
     if (!isLoaded) return
 
     console.log(emailAddress, password);
+
+    if (!emailAddress || !password) {
+      Alert.alert('Email address and password are required to sign up.')
+      return;
+    }
     // Start sign-up process using email and password provided
     try {
       await signUp.create({
@@ -37,6 +42,8 @@ export default function SignUp() {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -44,6 +51,12 @@ export default function SignUp() {
   const onVerifyPress = async () => {
     if (!isLoaded) return
 
+    if (!code) {
+      Alert.alert('Verification code is required.')
+      return;
+    }
+
+    setIsLoading(true);
     try {
       // Use the code the user provided to attempt verification
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
@@ -64,6 +77,8 @@ export default function SignUp() {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -203,6 +218,7 @@ export default function SignUp() {
                         placeholderTextColor="#9CA3AF"
                         className='ml-3 flex-1 text-gray-900'
                         editable={!isLoading}
+                        secureTextEntry={true}
                         onChangeText={(password) => setPassword(password)}
                       />
                     </View>
