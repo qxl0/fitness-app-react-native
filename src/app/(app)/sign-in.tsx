@@ -92,6 +92,7 @@ export default function Page() {
                 placeholderTextColor="#9CA3AF"
                 className='ml-3 flex-1 text-gray-900'
                 editable={!isLoading}
+                secureTextEntry={true}
                 onChangeText={(password) => setPassword(password)}
               />
             </View>
