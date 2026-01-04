@@ -57,7 +57,7 @@ export default function Page() {
         <View className='flex-1 px-6'>
         <View className='flex-1 justify-center'>
           <View className='items-center mb-8'>
-            <View className='w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl items-center justify-center mb-4 shadown-lg'>
+            <View className='w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl items-center justify-center mb-4 shadow-lg'>
               <Ionicons name="fitness" size={40} color="white" />
             </View>
             <Text className='text-3xl font-bold text-gray-900 mb-2'>FitTracker</Text>
@@ -101,7 +101,7 @@ export default function Page() {
         <TouchableOpacity 
           onPress={onSignInPress}
           disabled={isLoading}
-          className={`rounded-xl py-4 shadow-sm mb-4 ${isLoading ?  "bg-gray-400" : "bg-blue-600" }`}
+          className={`rounded-xl py-3 shadow-sm mb-4 ${isLoading ?  "bg-gray-400" : "bg-blue-600" }`}
           activeOpacity={0.8}
         >
           <Text className='text-center text-white text-lg font-semibold'>
